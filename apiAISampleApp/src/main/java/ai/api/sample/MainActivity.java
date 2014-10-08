@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity implements AIListener {
 
         final AIConfiguration config = new AIConfiguration(ACCESS_TOKEN,
                 SUBSCRIPTION_KEY, Locale.US.toString(),
-                AIConfiguration.RecognitionEngine.Google);
+                AIConfiguration.RecognitionEngine.Speaktoit);
 
         aiService = AIService.getService(this, config);
         aiService.setListener(this);
