@@ -64,8 +64,8 @@ public class SpeaktoitRecognitionRequestTask extends AsyncTask<SpeaktoitRecognit
             final HttpClient httpClient = new HttpClient(connection);
             httpClient.connectForMultipart();
 
-            httpClient.addFilePart("sound","sound.wav",soundData);
-            httpClient.addFormPart("metadata", metadataString);
+            httpClient.addFormPart("request", metadataString);
+            httpClient.addFilePart("voiceData","sound.wav",soundData);
 
             httpClient.finishMultipart();
 
