@@ -45,21 +45,24 @@ public class HttpClient {
         con.setDoOutput(true);
         con.setRequestProperty("Connection", "Keep-Alive");
         con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+        con.addRequestProperty("Authorization", "Bearer INSERT_CLIENT_ACCESS_TOKEN_HERE");
+        con.addRequestProperty("ocp-apim-subscription-key", "INSERT_SUBSCRIPTION_KEY_HERE");
+
         con.connect();
         os = con.getOutputStream();
     }
 
     public void addFormPart(final String paramName, final String value) throws IOException {
         os.write( (delimiter + boundary + "\r\n").getBytes());
-        os.write( "Content-Type: text/plain\r\n".getBytes());
-        os.write( ("Content-Disposition: form-data; name=\"" + paramName + "\"\r\n").getBytes());
+        os.write( ("Content-Type: application/json\r\n").getBytes());
+        os.write( ("Content-Disposition: form-data; name=\"" + paramName + "\";\r\n").getBytes());
         os.write( ("\r\n" + value + "\r\n").getBytes());
     }
 
     public void addFilePart(final String paramName, final String fileName, final byte[] data) throws IOException {
         os.write( (delimiter + boundary + "\r\n").getBytes());
-        os.write( ("Content-Disposition: form-data; name=\"" + paramName +  "\"; filename=\"" + fileName + "\"\r\n"  ).getBytes());
-        os.write( ("Content-Type: application/octet-stream\r\n"  ).getBytes());
+        os.write( ("Content-Disposition: form-data; name=\"" + paramName +  "\"; filename=\"" + fileName + "\";\r\n"  ).getBytes());
+        os.write( ("Content-Type: audio/x-wav\r\n"  ).getBytes());
         os.write( ("Content-Transfer-Encoding: binary\r\n"  ).getBytes());
         os.write("\r\n".getBytes());
 
